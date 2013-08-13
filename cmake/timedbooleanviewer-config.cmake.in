@@ -1,0 +1,54 @@
+# TimedBooleanViewer CMake config file
+#
+# This file sets the following variables:
+# TimedBooleanViewer_FOUND - Always TRUE.
+# TimedBooleanViewer_INCLUDE_DIRS - Directories containing the TimedBooleanViewer include files.
+# TimedBooleanViewer_IDL_DIRS - Directories containing the TimedBooleanViewer IDL files.
+# TimedBooleanViewer_LIBRARIES - Libraries needed to use TimedBooleanViewer.
+# TimedBooleanViewer_DEFINITIONS - Compiler flags for TimedBooleanViewer.
+# TimedBooleanViewer_VERSION - The version of TimedBooleanViewer found.
+# TimedBooleanViewer_VERSION_MAJOR - The major version of TimedBooleanViewer found.
+# TimedBooleanViewer_VERSION_MINOR - The minor version of TimedBooleanViewer found.
+# TimedBooleanViewer_VERSION_REVISION - The revision version of TimedBooleanViewer found.
+# TimedBooleanViewer_VERSION_CANDIDATE - The candidate version of TimedBooleanViewer found.
+
+message(STATUS "Found TimedBooleanViewer-@PROJECT_VERSION@")
+set(TimedBooleanViewer_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(TimedBooleanViewer_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(TimedBooleanViewer_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(TimedBooleanViewer_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(TimedBooleanViewer_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(TimedBooleanViewer_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(TimedBooleanViewer_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(TimedBooleanViewer_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(TimedBooleanViewer_VERSION @PROJECT_VERSION@)
+set(TimedBooleanViewer_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(TimedBooleanViewer_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(TimedBooleanViewer_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(TimedBooleanViewer_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
